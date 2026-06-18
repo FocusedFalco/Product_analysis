@@ -47,10 +47,9 @@ on c_3.userid = c_4.userid and c_3.sessionid = c_4.sessionid
 where c_4.userid is null;
 
 -- 9. To find users who continue from home to product page
--- Note: Set c_4.userid is not null to find users who continue. The query below checks for null (drop off).
 select avg(c_3.timeonpage_seconds) from(select * from customer_journey
 where pagetype = "home") as c_3
 left join (select * from customer_journey
 where pagetype = "product_page") as c_4
 on c_3.userid = c_4.userid and c_3.sessionid = c_4.sessionid
-where c_4.userid is null;
+where c_4.userid is not null;
